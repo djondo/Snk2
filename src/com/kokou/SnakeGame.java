@@ -1,8 +1,7 @@
-package com.clara;
-
-import java.util.Timer;
+package com.kokou;
 
 import javax.swing.*;
+import java.util.Timer;
 
 
 public class SnakeGame {
@@ -13,7 +12,7 @@ public class SnakeGame {
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 50;
+	public final static int squareSize = 30;// square size changed
 
 	protected static Snake snake ;
 
@@ -32,7 +31,7 @@ public class SnakeGame {
 	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
 	//Other classes like Snake and DrawSnakeGamePanel will need to query this, and change its value
 
-	protected static long clockInterval = 500; //controls game speed
+	protected static final long CLOCK_INTERVAL = 500; //controls game speed
 	//Every time the clock ticks, the snake moves
 	//This is the time between clock ticks, in milliseconds
 	//1000 milliseconds = 1 second.
@@ -80,7 +79,7 @@ public class SnakeGame {
 	protected static void newGame() {
 		Timer timer = new Timer();
 		GameClock clockTick = new GameClock(snake, kibble, score, snakePanel);
-		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
+		timer.scheduleAtFixedRate(clockTick, 0 , CLOCK_INTERVAL);
 	}
 
 	public static void main(String[] args) {

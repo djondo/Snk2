@@ -1,9 +1,8 @@
-package com.clara;
+package com.kokou;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
-
-import javax.swing.JPanel;
 
 /** This class responsible for displaying the graphics, so the snake, grid, kibble, instruction text and high score
  * 
@@ -29,7 +28,7 @@ public class DrawSnakeGamePanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);       
+		super.paintComponent(g);
 
         /* Where are we at in the game? 4 phases.. 
          * 1. Before game starts
@@ -38,30 +37,39 @@ public class DrawSnakeGamePanel extends JPanel {
          * 4. or, game won
          */
 
-        gameStage = SnakeGame.getGameStage();
-        
-        switch (gameStage) {
-        case 1: {
-        	displayInstructions(g);
-        	break;
-        } 
-        case 2 : {
-        	displayGame(g);
-        	break;
-        }
-        case 3: {
-        	displayGameOver(g);
-        	break;
-        }
-        case 4: {
-        	displayGameWon(g);
-        	break;
-        }
-        }
-        
-        
-        
-    }
+		gameStage = SnakeGame.getGameStage();
+
+		//trying start with default case
+
+//		case 0: {
+//			System.out.println("RNG chose 0");
+//			break;
+
+
+		switch (gameStage) {
+			case 1: {
+				displayInstructions(g);
+				break;
+			}
+			case 2: {
+				displayGame(g);
+				break;
+			}
+			case 3: {
+				displayGameOver(g);
+				break;
+			}
+			case 4: {
+				displayGameWon(g);
+				break;
+			}
+			default: {
+				System.out.println("Invalid case");
+			}
+
+
+		}
+	}
 
 	private void displayGameWon(Graphics g) {
 		// TODO Replace this with something really special!
@@ -102,7 +110,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		
 		g.clearRect(0, 0, maxX, maxY);
 
-		g.setColor(Color.RED);
+		g.setColor(Color.blue);// Have changed color from red to "blue"
 
 		//Draw grid - horizontal lines
 		for (int y=0; y <= maxY ; y+= squareSize){			
@@ -116,8 +124,8 @@ public class DrawSnakeGamePanel extends JPanel {
 
 	private void displayKibble(Graphics g) {
 
-		//Draw the kibble in green
-		g.setColor(Color.GREEN);
+		//Draw the kibble in yellow
+		g.setColor(Color.yellow);
 
 		int x = kibble.getKibbleX() * SnakeGame.squareSize;
 		int y = kibble.getKibbleY() * SnakeGame.squareSize;
@@ -131,7 +139,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		LinkedList<Point> coordinates = snake.segmentsToDraw();
 		
 		//Draw head in grey
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.RED);// set now to red color
 		Point head = coordinates.pop();
 		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		

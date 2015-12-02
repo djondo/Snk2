@@ -1,4 +1,4 @@
-package com.clara;
+package com.kokou;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -113,7 +113,7 @@ public class Snake {
 
 	protected void moveSnake(){
 		//Called every clock tick
-		
+
 		//Must check that the direction snake is being sent in is not contrary to current heading
 		//So if current heading is down, and snake is being sent up, then should ignore.
 		//Without this code, if the snake is heading up, and the user presses left then down quickly, the snake will back into itself.
@@ -129,13 +129,29 @@ public class Snake {
 		if (currentHeading == DIRECTION_RIGHT && lastHeading == DIRECTION_LEFT) {
 			currentHeading = DIRECTION_LEFT; //keep going the same way
 		}
-		
-		//Did you hit the wall, snake? 
-		//Or eat your tail? Don't move. 
+
+		// adding warp walls(when the snake
+		// goes off one side of the screen, it reappears on the other)
+		if (snakeHeadX == 0) {
+			snakeHeadX = maxY ;
+//		}else if(snakeHeadY == 0){
+//		snakeHeadY = maxX;// goes the other side
+//
+//			// Trying to add mazes
+//			if(snakeHeadX == squareSize){
+//				snakeHeadX =  - 1;
+//			}
+
+
+		}
+
+		//Did you hit the wall, snake?
+		//Or eat your tail? Don't move.
 
 		if (hitWall == true || ateTail == true) {
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return;
+
 		}
 
 		//Use snakeSquares array, and current heading, to move snake
@@ -143,7 +159,7 @@ public class Snake {
 		//Put a 1 in new snake head square
 		//increase all other snake segments by 1
 		//set tail to 0 if snake did not just eat
-		//Otherwise leave tail as is until snake has grown the correct amount 
+		//Otherwise leave tail as is until snake has grown the correct amount
 
 		//Find the head of the snake - snakeHeadX and snakeHeadY
 
@@ -159,26 +175,26 @@ public class Snake {
 		}
 
 		//now identify where to add new snake head
-		if (currentHeading == DIRECTION_UP) {		
+		if (currentHeading == DIRECTION_UP) {
 			//Subtract 1 from Y coordinate so head is one square up
 			snakeHeadY-- ;
 		}
-		if (currentHeading == DIRECTION_DOWN) {		
+		if (currentHeading == DIRECTION_DOWN) {
 			//Add 1 to Y coordinate so head is 1 square down
 			snakeHeadY++ ;
 		}
-		if (currentHeading == DIRECTION_LEFT) {		
+		if (currentHeading == DIRECTION_LEFT) {
 			//Subtract 1 from X coordinate so head is 1 square to the left
 			snakeHeadX -- ;
 		}
-		if (currentHeading == DIRECTION_RIGHT) {		
+		if (currentHeading == DIRECTION_RIGHT) {
 			//Add 1 to X coordinate so head is 1 square to the right
 			snakeHeadX ++ ;
 		}
 
 		//Does this make snake hit the wall?
 		if (snakeHeadX >= maxX || snakeHeadX < 0 || snakeHeadY >= maxY || snakeHeadY < 0 ) {
-			hitWall = true;	
+			hitWall = true;
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return;
 		}
@@ -193,12 +209,12 @@ public class Snake {
 		}
 
 		//Otherwise, game is still on. Add new head
-		snakeSquares[snakeHeadX][snakeHeadY] = 1; 
+		snakeSquares[snakeHeadX][snakeHeadY] = 1;
 
 		//If snake did not just eat, then remove tail segment
 		//to keep snake the same length.
 		//find highest number, which should now be the same as snakeSize+1, and set to 0
-		
+
 		if (justAteMustGrowThisMuch == 0) {
 			for (int x = 0 ; x < maxX ; x++) {
 				for (int y = 0 ; y < maxY ; y++){
@@ -213,7 +229,7 @@ public class Snake {
 			justAteMustGrowThisMuch -- ;
 			snakeSize ++;
 		}
-		
+
 		lastHeading = currentHeading; //Update last confirmed heading
 
 	}

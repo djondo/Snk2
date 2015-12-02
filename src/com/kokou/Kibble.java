@@ -1,4 +1,4 @@
-package com.clara;
+package com.kokou;
 
 import java.util.Random;
 
@@ -9,8 +9,8 @@ public class Kibble {
 	 * There is only one Kibble and when the snake eats it, then it moves. 
 	 */
 	
-	private int kibbleX; //This is the square number (not pixel)
-	private int kibbleY;  //This is the square number (not pixel)
+	protected int kibbleX; //This is the square number (not pixel)
+	protected int kibbleY;  //This is the square number (not pixel)
 	
 	public Kibble(Snake s){
 		//Kibble needs to know where the snake is, so it does not create a kibble in the snake
